@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export default function CreateTask() {
+export default function CreateTask(props) {
   // Initialize state with an empty task
   const [task, setTask] = useState({
     id: '',
@@ -22,6 +22,15 @@ export default function CreateTask() {
     axios.post('/tasks', task)
       .then(response => {
         console.log(response.data);
+        event.target.reset();
+        setTask({
+          id: '',
+          description: '',
+          complete: false,
+          priority: 1,
+          dueDate: ''
+        });
+        props.onCreateTask(response.data);
       })
       .catch(error => {
         console.error(error);

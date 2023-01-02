@@ -1,13 +1,6 @@
 {
   "tasks": [
     {
-      "id": 2,
-      "description": "buy groceries",
-      "complete": false,
-      "priority": "2",
-      "dueDate": "2023-01-03"
-    },
-    {
       "id": 4,
       "description": "Wash car",
       "complete": false,
@@ -20,6 +13,20 @@
       "complete": true,
       "priority": "1",
       "dueDate": "2023-01-04"
+    },
+    {
+      "id": 6,
+      "description": "Wash cars on wednesday",
+      "complete": false,
+      "priority": "3",
+      "dueDate": "2023-01-04"
+    },
+    {
+      "id": 7,
+      "description": "Pick up the Kids",
+      "complete": false,
+      "priority": "1",
+      "dueDate": "2023-01-01"
     }
   ]
 }

@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import EditTaskForm from './EditTaskForm'
 
 export default function TaskList(props) {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(props.tasks);
   const [sortCriteria, setSortCriteria] = useState('priority');
   const [filterText, setFilterText] = useState('');
+  const [selectedTask, setSelectedTask] = useState(null);
 
-  useEffect(() => {
-    axios.get('/tasks')
-      .then(response => {
-        setTasks(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
+  const handleFilterChange = (event) => {
+    setFilterText(event.target.value);
+  }
 
   const sortedTasks = tasks.sort((a, b) => {
     if (sortCriteria === 'priority') {
@@ -24,14 +20,11 @@ export default function TaskList(props) {
     } else {
       return a.description.localeCompare(b.description);
     }
-  });
+  })
 
   const filteredTasks = sortedTasks.filter(
     task => task.description.toLowerCase().includes(filterText.toLowerCase())
   );
-  const handleFilterChange = (event) => {
-    setFilterText(event.target.value);
-  }
 
   const renderTasks = () => {
     return filteredTasks.map(task => (
@@ -39,7 +32,7 @@ export default function TaskList(props) {
         {task.description}
         <button
           onClick={() => {
-            props.onEdit(task);
+            setSelectedTask(task);
           }}
         >
           Edit
@@ -94,8 +87,15 @@ export default function TaskList(props) {
         />
         <button type="submit">Filter</button>
       </form>
+      {selectedTask && (
+        <EditTaskForm
+          task={selectedTask}
+          onEditTask={props.onEditTask}
+          onCancel={() => setSelectedTask(null)}
+        />
+      )}
       <ul>
-        {renderTasks()}
+        {tasks && renderTasks()}
       </ul>
     </div>
   );
