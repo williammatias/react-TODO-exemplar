@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-export default function EditForm(props) {
-    const [formData, setFormData] = useState(props.object)
+export default function EditTaskForm(props) {
+    const [formData, setFormData] = useState(props.task)
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });

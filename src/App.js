@@ -1,20 +1,39 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import TaskList from './components/TaskList'
-import EditForm from './components/EditForm';
 import CreateTask from './components/CreateTask';
 
 function App() {
-  const [currentTask, setCurrentTask] = useState(null);
-  const handleEdit = (task) => {
-    setCurrentTask(task);
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    axios.get('/tasks')
+      .then(response => {
+        setTasks(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
+  const handleCreateTask = (task) => {
+    setTasks([...tasks, task]);
+  }
+  const handleEditTask = (updatedTask) => {
+    setTasks(tasks.map(task => {
+      if (task.id === updatedTask.id) {
+        return updatedTask;
+      } else {
+        return task;
+      }
+    }));
   }
   return (
-    <div className="App">
-      {currentTask && <EditForm object={currentTask} />}
-      <TaskList onEdit={handleEdit} />
-      <CreateTask />
+    <div>
+      <h1>Task Manager</h1>
+      {tasks.length > 0 && <TaskList tasks={tasks} onEditTask={handleEditTask} />}
+      <CreateTask onCreateTask={handleCreateTask} />
     </div>
   );
 }
