@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import TaskList from './components/TaskList'
 import EditForm from './components/EditForm';
