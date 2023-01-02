@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 export default function EditForm(props) {
     const [formData, setFormData] = useState(props.object)
@@ -11,7 +11,7 @@ export default function EditForm(props) {
         event.preventDefault();
     }
     const handleComplete = () => {
-        axios.put('/tasks/' + formData.id, {
+        axios.patch('/tasks/' + formData.id, {
           complete: true
         })
           .then(response => {
