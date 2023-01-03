@@ -9,18 +9,28 @@ export default function EditTaskForm(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        // Send PUT request to server to update task
+        axios.put('/tasks/' + formData.id, formData)
+            .then(response => {
+                console.log(response.data);
+                // Call parent component's onEditTask function
+                props.onEditTask(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
     const handleComplete = () => {
         axios.patch('/tasks/' + formData.id, {
-          complete: true
+            complete: true
         })
-          .then(response => {
-            setFormData({ ...formData, complete: true });
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
+            .then(response => {
+                setFormData({ ...formData, complete: true });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
     return (
         <form onSubmit={handleSubmit}>
             <label htmlFor="id">ID:</label>
@@ -68,9 +78,14 @@ export default function EditTaskForm(props) {
                 onChange={handleChange}
             />
             <br />
-            <button type="submit">Submit</button>
+            <button type="submit">Save</button>
             <button type="button" onClick={handleComplete}>
                 Complete Task
+            </button>
+            <button
+                onClick={props.onCancel}
+            >
+                Cancel
             </button>
         </form>
     )
