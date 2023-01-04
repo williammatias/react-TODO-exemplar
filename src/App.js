@@ -30,7 +30,7 @@ function App() {
     }));
   }
   return (
-    <div>
+    <div className='App'>
       <h1>Task Manager</h1>
       {tasks.length > 0 && <TaskList tasks={tasks} onEditTask={handleEditTask} />}
       <CreateTask onCreateTask={handleCreateTask} />

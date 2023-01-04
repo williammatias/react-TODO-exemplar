@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import EditTaskForm from './EditTaskForm'
+import './TaskList.css';
+
+
+import EditIcon from '../assets/edit-icon';
+import DeleteIcon from '../assets/delete-icon';
 
 export default function TaskList(props) {
   const [tasks, setTasks] = useState(props.tasks);
@@ -35,7 +40,7 @@ export default function TaskList(props) {
             setSelectedTask(task);
           }}
         >
-          Edit
+          <EditIcon />
         </button>
         <button
           onClick={() => {
@@ -49,7 +54,7 @@ export default function TaskList(props) {
               });
           }}
         >
-          Delete
+          <DeleteIcon />
         </button>
       </li>
     ));
