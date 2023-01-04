@@ -16,7 +16,7 @@
     },
     {
       "id": 6,
-      "description": "Wash cars on wednesday",
+      "description": "Wash cars on Monday",
       "complete": false,
       "priority": "3",
       "dueDate": "2023-01-04"

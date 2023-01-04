@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import './CreateTask.css'
+
 export default function CreateTask(props) {
   // Initialize state with an empty task
   const [task, setTask] = useState({
