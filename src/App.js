@@ -17,17 +17,15 @@ function App() {
       });
   }, []);
 
-  const handleCreateTask = (task) => {
-    setTasks([...tasks, task]);
-  }
+  const handleCreateTask = (task) =>
+    setTasks([...tasks, task])
+
   const handleEditTask = (updatedTask) => {
-    setTasks(tasks.map(task => {
-      if (task.id === updatedTask.id) {
-        return updatedTask;
-      } else {
-        return task;
-      }
-    }));
+    setTasks(
+      tasks.map(
+        task => task.id === updatedTask.id ? updatedTask : task
+      )
+    )
   }
   return (
     <div className='App'>
