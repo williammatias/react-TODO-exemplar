@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import EditTaskForm from './EditTaskForm'
 import './TaskList.css';
@@ -12,6 +12,12 @@ export default function TaskList(props) {
   const [sortCriteria, setSortCriteria] = useState('priority');
   const [filterText, setFilterText] = useState('');
   const [selectedTask, setSelectedTask] = useState(null);
+
+  useEffect(() => {
+    if (props.tasks.length > tasks.length) {
+      setTasks(props.tasks);
+    }
+  }, [props.tasks]);
 
   const handleFilterChange = (event) => {
     setFilterText(event.target.value);
